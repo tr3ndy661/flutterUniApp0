@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_app/profile.dart';
 import 'package:provider/provider.dart';
 import 'providers/user_provider.dart';
+// import 'providers/cart_provider.dart';
+import 'providers/likes_provider.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -12,6 +14,9 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   int _selectedIndex = 0;
+
+  // Add state for tracking liked items
+  Set<int> _likedItems = {};
 
   void _onItemTapped(int index) {
     if (index == 1) return; // Ignore clik on cart icon
@@ -103,12 +108,96 @@ class _homepageState extends State<homepage> {
               ),
             ),
 
+            // Add likes counter
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Consumer<LikesProvider>(
+                builder:
+                    (context, likesProvider, _) => Text(
+                      'Total Likes: ${likesProvider.likesCount}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF152e1a),
+                      ),
+                    ),
+              ),
+            ),
+
+            // Product containers
+            // Container(
+            //   margin: EdgeInsets.symmetric(vertical: 10),
+            //   padding: EdgeInsets.all(15),
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(20),
+            //     color: Colors.white,
+            //   ),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text(
+            //             'Hyper',
+            //             style: TextStyle(
+            //               fontSize: 20,
+            //               fontWeight: FontWeight.bold,
+            //               color: Color(0xFF152e1a),
+            //             ),
+            //           ),
+            //           IconButton(
+            //             icon: Icon(
+            //               _likedItems.contains(0)
+            //                   ? Icons.favorite
+            //                   : Icons.favorite_border,
+            //             ),
+            //             color: Colors.pink,
+            //             onPressed: () {
+            //               setState(() {
+            //                 if (_likedItems.contains(0)) {
+            //                   _likedItems.remove(0);
+            //                   Provider.of<LikesProvider>(
+            //                     context,
+            //                     listen: false,
+            //                   ).decrementLikes();
+            //                 } else {
+            //                   _likedItems.add(0);
+            //                   Provider.of<LikesProvider>(
+            //                     context,
+            //                     listen: false,
+            //                   ).incrementLikes();
+            //                 }
+            //               });
+            //             },
+            //           ),
+            //         ],
+            //       ),
+            //       Center(
+            //         child: Image.network(
+            //           imageUrl,
+            //           height: 150,
+            //           fit: BoxFit.contain,
+            //         ),
+            //       ),
+            //       SizedBox(height: 10),
+            //       Text(
+            //         '\$99.00',
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.bold,
+            //           color: Color(0xFF152e1a),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 10),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: const Color.fromARGB(255, 190, 190, 190),
+                color: Color.fromARGB(255, 190, 190, 190),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,9 +214,29 @@ class _homepageState extends State<homepage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite_border),
+                        icon: Icon(
+                          _likedItems.contains(1)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                        ),
                         color: Colors.pink,
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            if (_likedItems.contains(1)) {
+                              _likedItems.remove(1);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).decrementLikes();
+                            } else {
+                              _likedItems.add(1);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).incrementLikes();
+                            }
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -172,9 +281,29 @@ class _homepageState extends State<homepage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite_border),
+                        icon: Icon(
+                          _likedItems.contains(2)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                        ),
                         color: Colors.pink,
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            if (_likedItems.contains(2)) {
+                              _likedItems.remove(2);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).decrementLikes();
+                            } else {
+                              _likedItems.add(2);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).incrementLikes();
+                            }
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -219,56 +348,29 @@ class _homepageState extends State<homepage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite_border),
-                        color: Colors.pink,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Image.network(
-                      imageUrl,
-                      height: 150,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '\$99.00',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF152e1a),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(255, 190, 190, 190),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Hyper',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF152e1a),
+                        icon: Icon(
+                          _likedItems.contains(3)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.favorite_border),
                         color: Colors.pink,
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            if (_likedItems.contains(3)) {
+                              _likedItems.remove(3);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).decrementLikes();
+                            } else {
+                              _likedItems.add(3);
+                              Provider.of<LikesProvider>(
+                                context,
+                                listen: false,
+                              ).incrementLikes();
+                            }
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -295,9 +397,8 @@ class _homepageState extends State<homepage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',

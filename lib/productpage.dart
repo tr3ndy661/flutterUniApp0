@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import 'providers/cart_provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -17,12 +19,11 @@ class ProductPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Column( 
+      body: Column(
         children: [
-         
           Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.45, 
+            height: MediaQuery.of(context).size.height * 0.45,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -33,12 +34,9 @@ class ProductPage extends StatelessWidget {
                 ),
               ],
             ),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.contain,
-            ),
+            child: Image.network(imageUrl, fit: BoxFit.contain),
           ),
-          Expanded( 
+          Expanded(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               padding: EdgeInsets.all(16),
@@ -67,28 +65,19 @@ class ProductPage extends StatelessWidget {
                   ),
                   Text(
                     '\$165.00',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 12),
 
                   // Description
                   Text(
                     'Description:',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
                   Text(
                     'Premium polarized sunglasses designed for optimal sun protection and style. Perfect for outdoor activities.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                   ),
                   SizedBox(height: 16),
 
@@ -101,31 +90,37 @@ class ProductPage extends StatelessWidget {
                       _buildDetailBox('Material', 'Glass'),
                     ],
                   ),
-                  
-                  Spacer(), 
+                  Spacer(),
 
-                
-                  Container(
-                    width: double.infinity,
-                    height: 60, 
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF1B4332),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), 
-                        ),
-                      ),
-                      child: Text(
-                        'Add to Cart',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18, 
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: 60,
+                  //   child: ElevatedButton(
+                  //     onPressed: () {
+                  //       Provider.of<CartProvider>(
+                  //         context,
+                  //         listen: false,
+                  //       ).incrementCount();
+                  //       ScaffoldMessenger.of(context).showSnackBar(
+                  //         SnackBar(content: Text('Added to cart!')),
+                  //       );
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       backgroundColor: Color(0xFF1B4332),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(12),
+                  //       ),
+                  //     ),
+                  //     child: Text(
+                  //       'Add to Cart',
+                  //       style: TextStyle(
+                  //         color: Colors.white,
+                  //         fontSize: 18,
+                  //         fontWeight: FontWeight.w500,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -135,7 +130,6 @@ class ProductPage extends StatelessWidget {
     );
   }
 
-  
   Widget _buildDetailBox(String label, String value) {
     return Container(
       padding: EdgeInsets.all(8),
@@ -146,25 +140,14 @@ class ProductPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[600],
-            ),
-          ),
+          Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
           SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ],
       ),
     );
   }
 }
-
-

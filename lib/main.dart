@@ -2,6 +2,8 @@ import 'package:ecommerce_app/homepage.dart';
 import 'package:ecommerce_app/productpage.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:ecommerce_app/providers/theme_provider.dart';
+// import 'package:ecommerce_app/providers/cart_provider.dart';
+import 'package:ecommerce_app/providers/likes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +13,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        // ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => LikesProvider()),
       ],
       child: const MyApp(),
     ),
