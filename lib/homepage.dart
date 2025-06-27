@@ -4,15 +4,19 @@ import 'package:provider/provider.dart';
 import 'providers/user_provider.dart';
 // import 'providers/cart_provider.dart';
 import 'providers/likes_provider.dart';
+import 'package:ecommerce_app/auth_provider.dart'; // Import AuthProvider here
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+// connect the homepage to not be displayed when the user is not logged in
+// import 'auth.dart'; // Adjust the import based on your project structure
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homepageState extends State<homepage> {
+class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   // Add state for tracking liked items
@@ -75,6 +79,20 @@ class _homepageState extends State<homepage> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            tooltip: 'Logout',
+            onPressed: () async {
+              await Provider.of<AuthProvider>(context, listen: false).signOut();
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Signed out successfully')),
+                );
+                // Pop all routes and return to login page
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+            },
+          ),
           // stylizing the bell icon
           IconButton(
             style: IconButton.styleFrom(
