@@ -3,12 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    // Return the appropriate FirebaseOptions based on the platform
     return const FirebaseOptions(
       apiKey: 'AIzaSyC8u3l5yHkPBbpXBfI2tLXu1mXIfLD-oa0',
       appId: '1:629712032808:web:fd2c6f96c4887b603c911d',
       messagingSenderId: '629712032808',
       projectId: 'flutteruni-43c3c',
+      authDomain: 'flutteruni-43c3c.firebaseapp.com',
     );
   }
 
@@ -18,6 +18,7 @@ class DefaultFirebaseOptions {
       appId: '1:629712032808:web:fd2c6f96c4887b603c911d',
       messagingSenderId: '629712032808',
       projectId: 'flutteruni-43c3c',
+      authDomain: 'flutteruni-43c3c.firebaseapp.com',
     );
   }
 
