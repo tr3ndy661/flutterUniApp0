@@ -48,10 +48,7 @@ class _ThingsToBuyPageState extends State<ThingsToBuyPage> {
                     decoration: InputDecoration(hintText: 'Add new item'),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: _addThing,
-                ),
+                IconButton(icon: Icon(Icons.add), onPressed: _addThing),
               ],
             ),
           ),
@@ -66,50 +63,60 @@ class _ThingsToBuyPageState extends State<ThingsToBuyPage> {
                   return Center(child: Text('No items yet.'));
                 }
                 return ListView(
-                  children: snapshot.data!.docs.map((doc) {
-                    final item = doc['item'];
-                    return ListTile(
-                      title: Text(item),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () async {
-                              final controller = TextEditingController(text: item);
-                              final result = await showDialog<String>(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text('Edit item'),
-                                  content: TextField(
-                                    controller: controller,
-                                    autofocus: true,
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, controller.text),
-                                      child: Text('Save'),
-                                    ),
-                                  ],
-                                ),
-                              );
-                              if (result != null && result.trim().isNotEmpty) {
-                                _updateThing(doc.id, result.trim());
-                              }
-                            },
+                  children:
+                      snapshot.data!.docs.map((doc) {
+                        final item = doc['item'];
+                        return ListTile(
+                          title: Text(item),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () async {
+                                  final controller = TextEditingController(
+                                    text: item,
+                                  );
+                                  final result = await showDialog<String>(
+                                    context: context,
+                                    builder:
+                                        (context) => AlertDialog(
+                                          title: Text('Edit item'),
+                                          content: TextField(
+                                            controller: controller,
+                                            autofocus: true,
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed:
+                                                  () => Navigator.pop(context),
+                                              child: Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed:
+                                                  () => Navigator.pop(
+                                                    context,
+                                                    controller.text,
+                                                  ),
+                                              child: Text('Save'),
+                                            ),
+                                          ],
+                                        ),
+                                  );
+                                  if (result != null &&
+                                      result.trim().isNotEmpty) {
+                                    _updateThing(doc.id, result.trim());
+                                  }
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () => _deleteThing(doc.id),
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () => _deleteThing(doc.id),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
                 );
               },
             ),
