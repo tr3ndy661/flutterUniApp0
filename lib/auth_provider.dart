@@ -1,7 +1,6 @@
-// connect this to the auth.dart file and use it in the login page
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:ecommerce_app/auth.dart'; // Adjust the import based on your project structure
+import 'package:ecommerce_app/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -15,6 +14,3 @@ class AuthProvider with ChangeNotifier {
     await _authService.signOut();
   }
 }
-
-// This code defines an AuthProvider class that uses the AuthService to handle user authentication.
-// It provides methods to sign in and sign out, and notifies listeners when the authentication state

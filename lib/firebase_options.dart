@@ -1,4 +1,4 @@
-// This file contains the Firebase configuration options for your app.
+
 import 'package:firebase_core/firebase_core.dart';
 
 class DefaultFirebaseOptions {

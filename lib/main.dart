@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/auth.dart' show AuthWrapper;
-import 'package:ecommerce_app/productpage.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:ecommerce_app/providers/theme_provider.dart';
 // import 'package:ecommerce_app/providers/cart_provider.dart'

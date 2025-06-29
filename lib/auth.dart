@@ -1,11 +1,9 @@
-// when the user opens the app, they should be able to log in with their email and password
-// if the user is not logged in, they should be redirected to the login page
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:ecommerce_app/auth_provider.dart'; // Adjust the import based on your project structure
-import 'package:ecommerce_app/homepage.dart'; // Adjust the import based on your project structure
+import 'package:ecommerce_app/auth_provider.dart'; 
+import 'package:ecommerce_app/homepage.dart'; 
 import 'package:ecommerce_app/loginpage.dart';
 
 void main() async {
@@ -16,6 +14,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User?>(context);
@@ -40,10 +42,6 @@ class AuthWrapper extends StatelessWidget {
     }
   }
 }
-// This code initializes Firebase and sets up a simple authentication flow using Provider.
-// It listens to authentication state changes and redirects the user to either a login page or a home page based on their authentication status.
-
-// create a simple login page that uses Firebase Auth
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -67,5 +65,3 @@ class AuthService {
     await _auth.signOut();
   }
 }
-// This class provides methods to sign in with email and password and to sign out.
-// It uses Firebase Auth to handle the authentication process.
